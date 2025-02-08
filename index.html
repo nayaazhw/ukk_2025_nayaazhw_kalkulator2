@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Antic+Didone&family=Dancing+Script:wght@400..700&family=Sacramento&display=swap" rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Antic+Didone&family=Dancing+Script:wght@400..700&family=Sacramento&display=swap" rel="stylesheet">
+            <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nayya Kalkulator</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+                .antic-didone-regular {
+            font-family: "Antic Didone", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        .body{
+            
+            height: 100vh;
+            background-color: #ece3d4;
+        }
+        
+        .kalkal {
+          font-family:"Antic Didone";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+                .nav-item {
+            color: #630d0c;
+        }
+        .bi-list{
+            color: #630d0c;
+            font-size: 40px;
+            margin-left: -310px;
+        }
+                .nav {
+            display: flex !important;
+            justify-content: flex-end !important;
+        }
+         
+        
+        
+        .calculator {
+            background: #630d0c;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            font-size: 2rem;
+            text-align: right;
+            padding: 10px;
+            border: none;
+            outline: none;
+            background: #ece3d4;
+            color: #630d0c;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family:Poppins;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            height: 60px;
+            font-size: 1.5rem;
+            border: none;
+            background: #ece3d4;
+            color: #630d0c;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family:Poppins;
+        }
+
+        button.operator {
+            background: #967a5a;
+            color: #ece3d4;
+        }
+
+        button.equals {
+            background: #628bb3;
+            grid-row: span 2;
+        }
+
+        button.zero {
+            grid-column: span 2;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 400px) {
+            .calculator {
+                width: 90%;
+            }
+            button {
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="body">
+    <nav class="navbar navbar-expand-lg" style="background-color:#ece3d4;">
+        <div class="container-fluid" style="background-color:#ece3d4; border-color:none;">
+          <img src="nayalogo.png" alt="logo" style="width:110px; margin-top:-10px;">
+        </div>
+    </nav>
+    <div class="text">
+       <h2 style="text-align:center; margin-top:30px; margin-bottom:20px; font-family:Antic Didone; color:#630d0c;">
+         Kalkulator
+       </h2>
+    </div>
+<div class="kalkal">
+    <div class="calculator" style="font-family:Antic Didone;">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button onclick="clearDisplay()" class="operator">C</button>
+            <button onclick="deleteLast()" class="operator">⌫</button>
+            <button onclick="appendToDisplay('/')" class="operator">÷</button>
+            <button onclick="appendToDisplay('*')" class="operator">×</button>
+
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('-')" class="operator">−</button>
+
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('+')" class="operator">+</button>
+
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="calculateResult()" class="equals">=</button>
+
+            <button onclick="appendToDisplay('0')" class="zero">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+        </div>
+    </div>
+        </div>
+        <div style="margin-top:115px;">
+          <p style="text-align:center;          font-family:Antic Didone;color: #630d0c;";>©copyright 2025 nayaazhw_kalkulator</p>
+        </div>
+        
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById("display").value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+        function deleteLast() {
+            let display = document.getElementById("display").value;
+            document.getElementById("display").value = display.slice(0, -1);
+        }
+
+        function calculateResult() {
+            try {
+                document.getElementById("display").value = eval(document.getElementById("display").value);
+            } catch (error) {
+                document.getElementById("display").value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
