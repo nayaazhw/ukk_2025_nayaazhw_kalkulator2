@@ -175,27 +175,77 @@
           <p style="text-align:center;          font-family:Antic Didone;color: #630d0c;";>©copyright 2025 nayaazhw_kalkulator</p>
         </div>
         
-    <script>
-        function appendToDisplay(value) {
-            document.getElementById("display").value += value;
+    
+<script>
+    let isResultDisplayed = false;
+
+    function appendToDisplay(value) {
+        let display = document.getElementById("display");
+
+        if (isResultDisplayed && !isNaN(value)) {
+            display.value = "";
+        }
+        isResultDisplayed = false;
+
+        let currentValue = display.value;
+
+        // Jika terakhir adalah operator, tambahkan angka baru tanpa menghapus input sebelumnya
+        if (isNaN(value) && isNaN(currentValue.slice(-1))) {
+            return;
         }
 
-        function clearDisplay() {
-            document.getElementById("display").value = "";
+        // Pisahkan angka dan operator dalam ekspresi
+        let parts = currentValue.split(/([+\-*/])/);
+        let lastPart = parts.pop(); // Ambil bagian terakhir (angka terakhir)
+
+        if (!isNaN(lastPart)) {
+            lastPart = lastPart.replace(/\./g, ''); // Hapus titik ribuan lama
         }
 
-        function deleteLast() {
-            let display = document.getElementById("display").value;
-            document.getElementById("display").value = display.slice(0, -1);
+        let newValue = lastPart + value;
+
+        if (!isNaN(newValue)) {
+            newValue = formatNumber(newValue);
         }
 
-        function calculateResult() {
-            try {
-                document.getElementById("display").value = eval(document.getElementById("display").value);
-            } catch (error) {
-                document.getElementById("display").value = "Error";
-            }
+        parts.push(newValue); // Tambahkan kembali angka yang sudah diformat
+        display.value = parts.join(""); // Gabungkan kembali semua bagian
+    }
+
+    function clearDisplay() {
+        document.getElementById("display").value = "";
+        isResultDisplayed = false;
+    }
+
+    function deleteLast() {
+        let display = document.getElementById("display");
+        let currentValue = display.value.replace(/\./g, '');
+
+        let newValue = currentValue.slice(0, -1);
+        display.value = formatNumber(newValue);
+    }
+
+    function calculateResult() {
+        let display = document.getElementById("display");
+
+        try {
+            let rawExpression = display.value.replace(/\./g, '');
+            let result = eval(rawExpression);
+
+            display.value = formatNumber(result);
+            isResultDisplayed = true;
+        } catch (error) {
+            display.value = "Error";
         }
-    </script>
+    }
+
+    function formatNumber(value) {
+        if (value === "" || isNaN(value)) return "";
+        return Number(value).toLocaleString('id-ID');
+    }
+</script>
+
+
+    
 </body>
 </html>
